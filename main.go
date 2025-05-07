@@ -14,7 +14,10 @@ func main() {
     // Welcome endpoint
     r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/json")
-        json.NewEncoder(w).Encode(map[string]string{"message": "Welcome"})
+        if err := json.NewEncoder(w).Encode(map[string]string{"message": "Welcome"}); err != nil {
+            http.Error(w, "Internal server error", http.StatusInternalServerError)
+            return
+        }
     }).Methods("GET")
 
     // Health endpoint
