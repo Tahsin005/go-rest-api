@@ -19,7 +19,7 @@ func main() {
 
     // Health endpoint
     r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-        w.Header().Set("Content-Type", "text/plain")
+        w.Header().Set("Content-Type", "application/json")
         json.NewEncoder(w).Encode(map[string]string{"status": "OK"})
     }).Methods("GET")
 
